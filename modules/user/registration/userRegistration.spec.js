@@ -10,20 +10,50 @@ import {
   successfulNotificationData,
 } from '../_data/userRegistration.data';
 import axios from 'axios';
+import { expect } from 'chai';
 
 describe('USER REGISTRATION', () => {
-  it('should 123 ', () => {
-    axios
-      .get('https://server-stage.pasv.us/info')
-      .then(res => {
-        console.log(res)
+  it('should 123 ', async () => {
+
+    const response = await axios
+      .get('https://server-stage.pasv.us/user/login',{
+        'email':'admin@pasv.com',
+        'password': 'admin',
       })
+      .then(res => res)
       .catch(err => {
         console.log('ERROR', err)
-      })
-    console,log('END')
+      });
+    console.log(response.data.token).not.empty;
+    expect(response.data.token).eq(200);
+    console.log('DATA '+ response);
+    console.log('END')
   });
-});
+
+
+    it('should token is not empty ', () => {
+      console.log(process.env.ADMIN_TOKEN)
+      expect(process.env.ADMIN_TOKEN).is.not.empty;
+    });
+
+  it('should verify from DB user by email ', async() => {
+    const email = 'admin@pasv.com';
+    const response = await axios({
+      method: 'get',
+      url: `https://server-stage.pasv.us/email/${email}`,
+      headers: {
+        Authorization: process.env.ADMIN_TOKEN,
+      },
+    })
+      .then(r => r)
+      .catch(e => e);
+
+    expect (response.status).eq(200);
+    expect(response.data.payload.name).eq('John Smith')
+
+  });
+
+  });
 
 
 // describe('USER REGISTRATION', () => {
@@ -128,4 +158,3 @@ describe('USER REGISTRATION', () => {
   //       done();
   //     });
   // });
-});
