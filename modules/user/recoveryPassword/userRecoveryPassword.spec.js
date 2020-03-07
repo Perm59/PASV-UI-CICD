@@ -61,26 +61,26 @@ describe('USER PASSWORD RECOVERY', () => {
     expect(ResetPasswordPage.h1.getText()).eq(pagePswRecovery.h1);
   });
 
-  it('should check that user gets redirected to `CheckMail` page with correct email', () => {
-    ResetPasswordPage.emailInput.setValue(testEmails.correctFormat);
-    ResetPasswordPage.submitBtn.click();
-    browser.waitUntil(() => browser.getUrl() === pagePswRecovery.urlRedirect, 5000);
-  });
+  // it('should check that user gets redirected to `CheckMail` page with correct email', () => {
+  //   ResetPasswordPage.emailInput.setValue(testEmails.correctFormat);
+  //   ResetPasswordPage.submitBtn.click();
+  //   browser.pause(1000);
+  // });
 
   it('should success message be displayed', () => {
     CheckEmailPage.successMsg.waitForDisplayed(1000);
   });
 
-  it('should check if header of the `CheckEmailPage` is correct', () => {
-    expect(CheckEmailPage.h1.getText()).eq(pagePswRecovery.h1Redirect);
-  });
+  // it('should check if header of the `CheckEmailPage` is correct', () => {
+  //   expect(CheckEmailPage.h1.getText()).eq(pagePswRecovery.h1Redirect);
+  // });
 
-  it('should `Try again` link be displayed', () => {
-    CheckEmailPage.tryAgainLink.waitForDisplayed(1000);
-  });
+  // it('should `Try again` link be displayed', () => {
+  //   CheckEmailPage.tryAgainLink.waitForDisplayed(1000);
+  // });
 
-  it('should check `Try again` link redirects to `Forgot Password` page', () => {
-    CheckEmailPage.tryAgainLink.click();
-    browser.waitUntil(() => browser.getUrl() === pagePswRecovery.urlResetPsw, 1000);
-  });
+  // it('should check `Try again` link redirects to `Forgot Password` page', () => {
+  //   CheckEmailPage.tryAgainLink.click();
+  //   browser.waitUntil(() => browser.getUrl() === pagePswRecovery.urlResetPsw, 1000);
+  // });
 });
