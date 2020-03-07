@@ -18,7 +18,6 @@ steps:
 - script:|
     npm i
   displayName: 'npm install'
-
 - script:|
     npm t
   displayName: 'npm test'
